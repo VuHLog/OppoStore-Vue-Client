@@ -1,0 +1,29 @@
+.account {
+    .v-enter-active,
+    .v-leave-active {
+      transition: opacity 0.5s ease;
+    }
+
+    .v-enter-from,
+    .v-leave-to {
+      opacity: 0;
+    }
+    .avatar {
+      img {
+        height: 40px;
+        width: 40px;
+      }
+    }
+    .user-dropdown {
+      z-index: 9999;
+      width: 140px;
+      right: 0;
+      .user-menu {
+        li {
+          a {
+            color: rgb(228, 228, 231);
+          }
+        }
+      }
+    }
+  }

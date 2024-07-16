@@ -13,21 +13,21 @@ const routes = [
     redirect: "/home",
     children: [
       {
+        path: "/sign-in",
+        name: "Sign in",
+        component: SignIn,
+      },
+      {
+        path: "/sign-up",
+        name: "Sign up",
+        component: SignUp,
+      },
+      {
         path: "/home",
         name: "Home",
         component: Home,
       },
     ]
-  },
-  {
-    path: "/sign-in",
-    name: "Sign in",
-    component: SignIn,
-  },
-  {
-    path: "/sign-up",
-    name: "Sign up",
-    component: SignUp,
   },
   {
     path: "/:pathMatch(.*)*",

@@ -38,10 +38,10 @@ body {
 }
 
 .bg-gray-50 {
-  background-color: rgb(249, 250, 251 );
+  background-color: rgb(249, 250, 251);
 }
 
-.bg-A3765D{
+.bg-A3765D {
   background-color: rgb(163, 118, 93);
 }
 
@@ -58,7 +58,7 @@ body {
 }
 
 .bg-zinc-400 {
-  background-color: rgb(161, 161, 170)
+  background-color: rgb(161, 161, 170);
 }
 
 .bg-zinc-700 {
@@ -89,17 +89,16 @@ body {
   border-bottom: 1px solid rgb(63, 63, 70);
 }
 
-.border-w-sm {
-  border-width: 1px;
-  border-style: solid;
+.rounded-be-xl {
+  border-bottom-right-radius: 24px;
 }
 
-// .text-primary{
-//     color
-// }
+.rounded-te-xl {
+  border-top-right-radius: 24px;
+}
 
-.text-zinc-300{
-  color: rgb(212, 212, 216 );
+.text-zinc-300 {
+  color: rgb(212, 212, 216);
 }
 
 .text-gray {
@@ -192,6 +191,10 @@ body {
   width: 66.66667%;
 }
 
+.min-w-100{
+  min-width: 100%;
+}
+
 .h-5 {
   height: 1.25rem;
 }
@@ -200,8 +203,16 @@ body {
   height: 28px;
 }
 
+.h-15 {
+  height: 60px;
+}
+
 .h-24 {
   height: 6rem;
+}
+
+.h-12_5{
+  height: 12.5rem;
 }
 
 .h-80 {
@@ -225,6 +236,10 @@ body {
 .object-cover {
   object-fit: cover;
 }
+
+.object-contain {
+  object-fit: contain;
+}
 .object-center {
   object-position: center;
 }
@@ -232,7 +247,6 @@ body {
 .uppercase {
   text-transform: uppercase;
 }
-
 
 .text-trending {
   border-color: #f39c12;
@@ -273,6 +287,14 @@ body {
   background-color: rgb(05, 07, 08);
 }
 
+.hover-text-green-lighten-2:hover{
+  color: #388E3C;
+}
+
+.hover-bg-green-lighten-2:hover{
+  background-color: #388E3C;
+}
+
 .z-30 {
   z-index: 30;
 }
@@ -281,7 +303,7 @@ body {
   outline: none;
 }
 
-.focus-outline-none:focus{
+.focus-outline-none:focus {
   outline: none;
 }
 
@@ -303,4 +325,8 @@ body {
   flex: 1;
   height: 1px;
   width: 100%;
+}
+
+.mt-30{
+  margin-top: 120px;
 }
