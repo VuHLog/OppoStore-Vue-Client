@@ -175,6 +175,10 @@ body {
   width: 28px;
 }
 
+.w-20px{
+  width: 20px;
+}
+
 .w-33p {
   width: 33.33333%;
 }
@@ -205,6 +209,10 @@ body {
 
 .h-15 {
   height: 60px;
+}
+
+.h-12{
+  height: 3rem;
 }
 
 .h-24 {
@@ -288,7 +296,11 @@ body {
 }
 
 .hover-text-green-lighten-2:hover{
-  color: #388E3C;
+  color: #388E3C !important;
+}
+
+.hover-text-green-darken-1:hover{
+  color: #43A047;
 }
 
 .hover-bg-green-lighten-2:hover{
@@ -330,3 +342,11 @@ body {
 .mt-30{
   margin-top: 120px;
 }
+
+.input-box-shadow-none:focus{
+  box-shadow: none !important;
+}
+.box-shadow-none{
+  box-shadow: none !important;
+}
+

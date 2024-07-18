@@ -148,7 +148,7 @@ async function logOut() {
                       <div class="mr-1">
                         <img
                           class="h-15"
-                          src="http://res.cloudinary.com/cloud1412/image/upload/v1720963270/hwot10dc7skwjnmvjcru.jpg"
+                          :src="variant.image"
                           alt=""
                         />
                       </div>
@@ -219,19 +219,19 @@ async function logOut() {
                 <li class="py-2 px-3 text-start hover-bg-green-lighten-2 user-none">
                   <router-link
                     class="text-decoration-none text-grey-darken-4"
-                    to="/user/update-profile"
+                    to="/user/account/profile"
                     >Thông tin</router-link
                   >
                 </li>
                 <li class="py-2 px-3 text-start hover-bg-green-lighten-2 user-none">
-                  <router-link class="text-decoration-none text-grey-darken-4" to="/user/tu-phim"
+                  <router-link class="text-decoration-none text-grey-darken-4" to="/user/purchase"
                     >Đơn mua</router-link
                   >
                 </li>
                 <li class="py-2 px-3 text-start hover-bg-green-lighten-2 user-none">
                   <router-link
                     class="text-decoration-none text-grey-darken-4"
-                    to="/user/doi-mat-khau"
+                    to="/user/account/password"
                     >Đổi mật khẩu</router-link
                   >
                 </li>

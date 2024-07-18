@@ -4,6 +4,11 @@ import { useBaseStore } from "@/store/index.js";
 import SignIn from "@pages/SignIn.vue"
 import SignUp from "@pages/SignUp.vue"
 import Home from "@pages/Home.vue"
+import UserLayout from "@layouts/UserLayout.vue"
+import Profile from "@pages/User/Profile.vue"
+import Password from "@pages/User/Password.vue"
+import Purchase from "@pages/User/Purchase.vue"
+
 
 
 const routes = [
@@ -27,12 +32,37 @@ const routes = [
         name: "Home",
         component: Home,
       },
+
+      //user
+      {
+        path: "/user",
+        name: "User",
+        component: UserLayout,
+        requiresAuth: true,
+        children: [
+          {
+            path: "account/profile",
+            name: "Profile",
+            component: Profile
+          },
+          {
+            path: "account/password",
+            name: "Password",
+            component: Password
+          },
+          {
+            path: "purchase",
+            name: "Purchase",
+            component: Purchase
+          },
+        ]
+      }
     ]
   },
-  {
-    path: "/:pathMatch(.*)*",
-    redirect: "/home",
-  },
+  // {
+  //   path: "/:pathMatch(.*)*",
+  //   redirect: "/home",
+  // },
 ];
 
 const router = createRouter({
