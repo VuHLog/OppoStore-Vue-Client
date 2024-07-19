@@ -102,11 +102,12 @@ async function logOut() {
           </router-link>
         </li>
         <li class="h-100">
-          <div
-            class="d-flex align-center hover-opacity-80 px-1 mx-3 h-100 cursor-pointer"
+          <router-link
+            to="/mobile-phone"
+            class="d-flex align-center hover-opacity-80 h-100 text-decoration-none text-grey-darken-4 px-1 mx-3 h-100"
           >
             <span>Điện Thoại</span>
-          </div>
+          </router-link>
         </li>
       </ul>
     </section>

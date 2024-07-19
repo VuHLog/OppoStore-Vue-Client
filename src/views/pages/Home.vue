@@ -45,7 +45,7 @@ onMounted(async () => {
         <div class="d-flex flex-wrap mt-2">
           <template v-for="mp in mobilePhonesBestSeller" :key="mp.id">
             <div class="col-3">
-              <v-card :product="mp"></v-card>
+              <v-card :product="mp" :variant="mp.variants[0]"></v-card>
             </div>
           </template>
         </div>
@@ -63,7 +63,7 @@ onMounted(async () => {
               :key="mp.id"
             >
               <div class="col-3">
-                <v-card :product="mp"></v-card>
+                <v-card :product="mp" :variant="mp.variants[0]"></v-card>
               </div>
             </template>
           </div>

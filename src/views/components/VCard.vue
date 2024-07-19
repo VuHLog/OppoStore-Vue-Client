@@ -14,6 +14,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  variant:{
+    type:Object,
+    required: false,
+  }
 });
 </script>
 <template>
@@ -28,19 +32,19 @@ const props = defineProps({
       <div class="d-flex justify-center my-3 product-image">
         <img
           class="object-contain h-12_5"
-          :src="props.product.variants[0].image"
+          :src="props.variant.image"
           alt=""
         />
       </div>
       <p class="uppercase text-14 mb-1 hover-text-green-lighten-2 product-name">
-        {{ `${props.product.name} ${props.product.ram}GB/${props.product.variants[0].rom.capacity}GB` }}
+        {{ `${props.product.name} ${props.product.ram}GB/${props.variant.rom.capacity}GB` }}
       </p>
       <div class="mb-1">
         <span class="text-12 p-1 mr-1 bg-grey-lighten-3 uppercase">{{props.product.screen}}</span>
         <span class="text-12 p-1 mr-1 bg-grey-lighten-3 uppercase">{{props.product.resolution}}</span>
       </div>
       <p class="m-0 text-red-accent-3 font-weight-bold">
-        {{ new Intl.NumberFormat("en-DE").format(props.product.variants[0].price) + "₫" }}
+        {{ new Intl.NumberFormat("en-DE").format(props.variant.price) + "₫" }}
       </p>
     </router-link>
   </div>

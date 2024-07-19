@@ -8,6 +8,7 @@ import UserLayout from "@layouts/UserLayout.vue"
 import Profile from "@pages/User/Profile.vue"
 import Password from "@pages/User/Password.vue"
 import Purchase from "@pages/User/Purchase.vue"
+import Filter from "@pages/Filter.vue"
 
 
 
@@ -56,7 +57,12 @@ const routes = [
             component: Purchase
           },
         ]
-      }
+      },
+      {
+        path: "/mobile-phone",
+        name: "Mobile Phone",
+        component: Filter,
+      },
     ]
   },
   // {
