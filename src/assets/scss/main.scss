@@ -21,72 +21,13 @@ body {
   background-color: #424040 !important;
 }
 
-.background-primary {
-  background-color: #151414 !important;
-}
-
-.bg-brown {
-  background-color: rgb(163, 118, 93);
-}
-
-.bg-black {
-  background-color: #000;
-}
-
-.bg-neutral-800 {
-  background-color: rgb(38, 38, 38);
-}
-
-.bg-gray-50 {
-  background-color: rgb(249, 250, 251);
-}
-
-.bg-A3765D {
-  background-color: rgb(163, 118, 93);
-}
-
-.bg-171717 {
-  background-color: #171717;
-}
-
-.bg-181818 {
-  background-color: #181818;
-}
-
-.bg-222222 {
-  background-color: #222222;
-}
-
-.bg-zinc-400 {
-  background-color: rgb(161, 161, 170);
-}
-
-.bg-zinc-700 {
-  background-color: rgb(63, 63, 70);
-}
-
-.bg-zinc-800 {
-  background-color: rgb(39, 39, 42);
-}
-
-.bg-zinc-900 {
-  background-color: rgb(24, 24, 27);
-}
-
-.border-zinc-700 {
-  border-color: rgb(63, 63, 70);
-}
-
-.border-zinc-800 {
-  border-color: #dfe6e9;
-}
-
-.border-zinc-900 {
-  background-color: rgb(24, 24, 27);
-}
-
 .border-b-custom {
   border-bottom: 1px solid rgb(63, 63, 70);
+}
+
+.border-green-darken-4{
+  border-width: 1px !important;
+  border-color: #1B5E20 !important;
 }
 
 .rounded-be-xl {
@@ -97,36 +38,8 @@ body {
   border-top-right-radius: 24px;
 }
 
-.text-zinc-300 {
-  color: rgb(212, 212, 216);
-}
-
-.text-gray {
-  color: #e5e7eb;
-}
-
-.text-gray-100 {
-  color: rgb(243, 244, 246);
-}
-
-.text-gray-200 {
-  color: rgb(229, 231, 235);
-}
-
-.text-gray-300 {
-  color: rgb(209, 213, 219);
-}
-
-.text-gray-400 {
-  color: rgb(156, 163, 175);
-}
-
-.text-gray-600 {
-  color: rgb(75, 85, 99);
-}
-
-.text-zinc-400 {
-  color: rgb(161, 161, 170);
+.text-10 {
+  font-size: 10px !important;
 }
 
 .text-12 {
@@ -151,14 +64,6 @@ body {
   line-height: 1.75rem;
 }
 
-.text-brown {
-  color: #d98a5e;
-}
-
-.text-white {
-  color: #fff;
-}
-
 .text-decoration-none {
   text-decoration: none;
 }
@@ -173,6 +78,10 @@ body {
 
 .w-7 {
   width: 28px;
+}
+
+.w-3{
+  width: 0.75rem;
 }
 
 .w-20px{
@@ -197,6 +106,10 @@ body {
 
 .min-w-100{
   min-width: 100%;
+}
+
+.h-3{
+  height: 0.75rem;
 }
 
 .h-5 {
@@ -256,13 +169,6 @@ body {
   text-transform: uppercase;
 }
 
-.text-trending {
-  border-color: #f39c12;
-  border-style: solid;
-  border-left-width: 3px;
-  font-size: 20px;
-}
-
 .text-justify {
   text-align: justify;
 }
@@ -271,28 +177,12 @@ body {
   transition: all 0.3 ease;
 }
 
-.hover:hover {
-  color: rgb(217, 138, 94);
-}
-
 .hover-opacity-80:hover {
   opacity: 0.8;
 }
 
 .hover-scale-105:hover {
   transform: scale(1.05);
-}
-
-.hover-bg-neutral-600:hover {
-  background-color: rgb(82, 82, 82);
-}
-
-.hover-bg-zinc-700:hover {
-  background-color: rgb(63, 63, 70);
-}
-
-.hover-bg-050708:hover {
-  background-color: rgb(05, 07, 08);
 }
 
 .hover-text-green-lighten-2:hover{

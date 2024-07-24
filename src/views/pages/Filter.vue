@@ -70,8 +70,8 @@ const rom = ref([
 const romSelected = ref("");
 
 const charger = ref([
-  { display: "Sạc nhanh(từ 20W)", value: ">20" },
-  { display: "Sạc nhanh(từ 60W)", value: ">60" },
+  { display: "Sạc nhanh(từ 20W)", value: "20" },
+  { display: "Sạc nhanh(từ 60W)", value: "60" },
 ]);
 const chargeSelected = ref("");
 
