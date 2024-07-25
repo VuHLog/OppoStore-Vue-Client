@@ -27,7 +27,7 @@ const props = defineProps({
   >
     <router-link
       class="d-block position-relative text-decoration-none w-100 pt-3 pb-4 px-4 text-grey-darken-4"
-      :to="'/xem-phim' + props.slug"
+      :to="'/mobile-phone/' + props.variant?.id"
     >
       <div class="d-flex justify-center my-3 product-image">
         <img

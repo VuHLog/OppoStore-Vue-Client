@@ -75,11 +75,27 @@ const charger = ref([
 ]);
 const chargeSelected = ref("");
 
-const mobilePhoneFiltered = ref([]);
+const variantsFiltered = ref([]);
+const variantsFilteredByROM = ref([]);
 
 onMounted(async () => {
   loadData();
 });
+
+function filterByRom(variants) {
+  // Lấy danh sách loại khác nhau
+  const romSet = new Set();
+  variants.forEach((variant) => {
+    const romString = JSON.stringify({
+      mobilePhone: variant.mobilePhone,
+      rom: variant.rom,
+    });
+    if (!romSet.has(romString)) {
+      romSet.add(romString);
+      variantsFilteredByROM.value.push(variant);
+    }
+  });
+}
 
 async function loadData() {
   await proxy.$api
@@ -105,7 +121,8 @@ async function loadData() {
         chargeSelected.value
     )
     .then((res) => {
-      mobilePhoneFiltered.value = res.content;
+      variantsFiltered.value = res.content;
+      filterByRom(variantsFiltered.value);
       totalElements.value = res.totalElements;
       totalPages.value = res.totalPages;
     })
@@ -213,7 +230,7 @@ watch(pageNumber, () => {
     </div>
     <div>
       <div class="d-flex flex-wrap mt-2">
-        <template v-for="variant in mobilePhoneFiltered" :key="variant.id">
+        <template v-for="variant in variantsFilteredByROM" :key="variant.id">
           <div class="col-3">
             <v-card :product="variant.mobilePhone" :variant="variant"></v-card>
           </div>

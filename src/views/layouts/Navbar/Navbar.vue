@@ -82,6 +82,23 @@ async function logOut() {
       .catch();
   }
 }
+
+function filterByRom(variants) {
+  // Lấy danh sách loại khác nhau
+  const romSet = new Set();
+  let variantsFiltered = [];
+  variants.forEach((variant) => {
+    const romString = JSON.stringify({
+      mobilePhone: variant.mobilePhone,
+      rom: variant.rom,
+    });
+    if (!romSet.has(romString)) {
+      romSet.add(romString);
+      variantsFiltered.push(variant);
+    }
+  });
+  return variantsFiltered;
+}
 </script>
 
 <template>
@@ -138,7 +155,7 @@ async function logOut() {
                 :key="mobilePhone.id"
               >
                 <template
-                  v-for="variant in mobilePhone.variants"
+                  v-for="variant in filterByRom(mobilePhone.variants)"
                   :key="variant.id"
                 >
                   <router-link
@@ -147,11 +164,7 @@ async function logOut() {
                   >
                     <li class="item d-flex align-item mb-2">
                       <div class="mr-1">
-                        <img
-                          class="h-15"
-                          :src="variant.image"
-                          alt=""
-                        />
+                        <img class="h-15" :src="variant.image" alt="" />
                       </div>
                       <div
                         class="movie-info d-flex flex-column justify-start align-start"
@@ -192,10 +205,21 @@ async function logOut() {
         <div
           class="d-flex align-center hover-opacity-80 px-1 mx-3 h-100 cursor-pointer text-grey-darken-4"
         >
-          <font-awesome-icon :icon="['fas', 'cart-shopping']" />
+          <div class="position-relative">
+            <font-awesome-icon
+              class="text-xl"
+              :icon="['fas', 'cart-shopping']"
+            />
+            <span
+              class="position-absolute text-white border-solid border-sm rounded-circle w-3 h-3 bg-red-darken-1 text-10 d-flex justify-center align-center top-0 start-50 translate-middle-x"
+              >0</span
+            >
+          </div>
         </div>
         <router-link to="/sign-in" v-if="username === ''">
-          <v-btn class="rounded-lg bg-green-darken-4 text-white">Đăng nhập </v-btn>
+          <v-btn class="rounded-lg bg-green-darken-4 text-white"
+            >Đăng nhập
+          </v-btn>
         </router-link>
         <div class="account position-relative" v-if="username !== ''">
           <div
@@ -217,19 +241,27 @@ async function logOut() {
                 {{ name }}
               </div>
               <ul class="user-menu p-0 m-0 py-2 cursor-pointer">
-                <li class="py-2 px-3 text-start hover-bg-green-lighten-2 user-none">
+                <li
+                  class="py-2 px-3 text-start hover-bg-green-lighten-2 user-none"
+                >
                   <router-link
                     class="text-decoration-none text-grey-darken-4"
                     to="/user/account/profile"
                     >Thông tin</router-link
                   >
                 </li>
-                <li class="py-2 px-3 text-start hover-bg-green-lighten-2 user-none">
-                  <router-link class="text-decoration-none text-grey-darken-4" to="/user/purchase"
+                <li
+                  class="py-2 px-3 text-start hover-bg-green-lighten-2 user-none"
+                >
+                  <router-link
+                    class="text-decoration-none text-grey-darken-4"
+                    to="/user/purchase"
                     >Đơn mua</router-link
                   >
                 </li>
-                <li class="py-2 px-3 text-start hover-bg-green-lighten-2 user-none">
+                <li
+                  class="py-2 px-3 text-start hover-bg-green-lighten-2 user-none"
+                >
                   <router-link
                     class="text-decoration-none text-grey-darken-4"
                     to="/user/account/password"

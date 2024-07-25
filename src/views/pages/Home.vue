@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, getCurrentInstance, watch } from "vue";
+import { computed, onMounted, ref, getCurrentInstance, watch } from "vue";
 import VCard from "@components/VCard.vue";
 
 const { proxy } = getCurrentInstance();
@@ -33,6 +33,23 @@ onMounted(async () => {
     })
     .catch((error) => console.log(error));
 });
+
+function filterByRom(variants) {
+  // Lấy danh sách loại khác nhau
+  const romSet = new Set();
+  let variantsFiltered = [];
+  variants.forEach((variant) => {
+    const romString = JSON.stringify({
+      mobilePhone: variant.mobilePhone,
+      rom: variant.rom,
+    });
+    if (!romSet.has(romString)) {
+      romSet.add(romString);
+      variantsFiltered.push(variant);
+    }
+  });
+  return variantsFiltered;
+}
 </script>
 
 <template>
@@ -44,9 +61,11 @@ onMounted(async () => {
         </h4>
         <div class="d-flex flex-wrap mt-2">
           <template v-for="mp in mobilePhonesBestSeller" :key="mp.id">
-            <div class="col-3">
-              <v-card :product="mp" :variant="mp.variants[0]"></v-card>
-            </div>
+            <template v-for="variant in filterByRom(mp.variants)">
+              <div class="col-3">
+                <v-card :product="mp" :variant="variant"></v-card>
+              </div>
+            </template>
           </template>
         </div>
       </div>
@@ -62,9 +81,11 @@ onMounted(async () => {
               v-for="mp in mobilePhonesByCategory[category.name]"
               :key="mp.id"
             >
-              <div class="col-3">
-                <v-card :product="mp" :variant="mp.variants[0]"></v-card>
-              </div>
+              <template v-for="variant in filterByRom(mp.variants)">
+                <div class="col-3">
+                  <v-card :product="mp" :variant="variant"></v-card>
+                </div>
+              </template>
             </template>
           </div>
         </template>
