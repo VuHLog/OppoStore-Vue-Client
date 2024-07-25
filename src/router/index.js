@@ -10,6 +10,7 @@ import Password from "@pages/User/Password.vue"
 import Purchase from "@pages/User/Purchase.vue"
 import Filter from "@pages/Filter.vue"
 import MobilePhone from "@pages/MobilePhone.vue"
+import Cart from "@pages/Cart.vue"
 
 
 
@@ -68,6 +69,12 @@ const routes = [
         path: "/mobile-phone/:variantId",
         name: "Mobile Phone Detail",
         component: MobilePhone,
+      },
+
+      {
+        path: "/cart",
+        name: "Cart",
+        component: Cart,
       },
     ]
   },

@@ -11,7 +11,7 @@ const totalPages = ref(10);
 const field = ref("createdTime");
 const pageSize = ref(4);
 const pageNumber = ref(1);
-const statusAccess = ref("")
+const statusAccess = ref("");
 
 const orders = ref([]);
 
@@ -62,7 +62,7 @@ function totalPrice(orderDetails) {
     >
       <div class="col-1 text-grey-darken-4">
         <span
-          class="d-inline-block py-4 text-decoration-none w-100 h-100 d-flex justify-center align-center hover-text-green-darken-1 cursor-pointer user-none"
+          class="d-inline-block py-4 text-decoration-none w-100 h-100 d-flex justify-center align-center hover-text-green-darken-1 cursor-pointer user-none status-item"
           :class="active === '' ? 'active' : ''"
           @click="loadData('')"
         >
@@ -72,7 +72,7 @@ function totalPrice(orderDetails) {
       <div class="col-2 text-grey-darken-4">
         <span
           to=""
-          class="d-inline-block py-4 text-decoration-none w-100 h-100 d-flex justify-center align-center hover-text-green-darken-1 cursor-pointer user-none"
+          class="d-inline-block py-4 text-decoration-none w-100 h-100 d-flex justify-center align-center hover-text-green-darken-1 cursor-pointer user-none status-item"
           :class="active === 'Chờ xử lý' ? 'active' : ''"
           @click="loadData('Chờ xử lý')"
         >
@@ -82,7 +82,7 @@ function totalPrice(orderDetails) {
       <div class="col-2 text-grey-darken-4">
         <span
           to=""
-          class="d-inline-block py-4 text-decoration-none w-100 h-100 d-flex justify-center align-center hover-text-green-darken-1 cursor-pointer user-none"
+          class="d-inline-block py-4 text-decoration-none w-100 h-100 d-flex justify-center align-center hover-text-green-darken-1 cursor-pointer user-none status-item"
           :class="active === 'Đã xác nhận' ? 'active' : ''"
           @click="loadData('Đã xác nhận')"
         >
@@ -92,7 +92,7 @@ function totalPrice(orderDetails) {
       <div class="col-2 text-grey-darken-4">
         <span
           to=""
-          class="d-inline-block py-4 text-decoration-none w-100 h-100 d-flex justify-center align-center hover-text-green-darken-1 cursor-pointer user-none"
+          class="d-inline-block py-4 text-decoration-none w-100 h-100 d-flex justify-center align-center hover-text-green-darken-1 cursor-pointer user-none status-item"
           :class="active === 'Đang chuyển hàng' ? 'active' : ''"
           @click="loadData('Đang chuyển hàng')"
         >
@@ -102,7 +102,7 @@ function totalPrice(orderDetails) {
       <div class="col-2 text-grey-darken-4">
         <span
           to=""
-          class="d-inline-block py-4 text-decoration-none w-100 h-100 d-flex justify-center align-center hover-text-green-darken-1 cursor-pointer user-none"
+          class="d-inline-block py-4 text-decoration-none w-100 h-100 d-flex justify-center align-center hover-text-green-darken-1 cursor-pointer user-none status-item"
           :class="active === 'Đang giao hàng' ? 'active' : ''"
           @click="loadData('Đang giao hàng')"
         >
@@ -112,7 +112,7 @@ function totalPrice(orderDetails) {
       <div class="col-1 text-grey-darken-4">
         <span
           to=""
-          class="d-inline-block py-4 text-decoration-none w-100 h-100 d-flex justify-center align-center hover-text-green-darken-1 cursor-pointer user-none"
+          class="d-inline-block py-4 text-decoration-none w-100 h-100 d-flex justify-center align-center hover-text-green-darken-1 cursor-pointer user-none status-item"
           :class="active === 'Đã huỷ' ? 'active' : ''"
           @click="loadData('Đã huỷ')"
         >
@@ -122,7 +122,7 @@ function totalPrice(orderDetails) {
       <div class="col-2 text-grey-darken-4">
         <span
           to=""
-          class="d-inline-block py-4 text-decoration-none w-100 h-100 d-flex justify-center align-center hover-text-green-darken-1 cursor-pointer user-none"
+          class="d-inline-block py-4 text-decoration-none w-100 h-100 d-flex justify-center align-center hover-text-green-darken-1 cursor-pointer user-none status-item"
           :class="active === 'Đã nhận hàng' ? 'active' : ''"
           @click="loadData('Đã nhận hàng')"
         >
@@ -151,36 +151,41 @@ function totalPrice(orderDetails) {
                   }}</span>
                 </div>
                 <li class="d-flex h-24 d-flex justify-space-between pt-3 pr-3">
-                  <div class="d-flex h-100">
-                    <div class="h-100">
-                      <img
-                        :src="orderDetail.variant.image"
-                        alt=""
-                        class="h-100 object-contain object-center rounded-lg d-block"
-                      />
+                  <router-link
+                    :to="'/mobile-phone/' + orderDetail.variant.id"
+                    class="text-decoration-none text-grey-darken-4"
+                  >
+                    <div class="d-flex h-100">
+                      <div class="h-100">
+                        <img
+                          :src="orderDetail.variant.image"
+                          alt=""
+                          class="h-100 object-contain object-center rounded-lg d-block"
+                        />
+                      </div>
+                      <div class="h-100 pl-3">
+                        <div class="mb-1">
+                          <span>
+                            {{ orderDetail.variant.mobilePhone.name }}
+                          </span>
+                        </div>
+                        <div class="mb-1 text-grey-lighten-1 text-14">
+                          <span>
+                            Phân loại hàng:
+                            {{
+                              orderDetail.variant.color.name +
+                              "/" +
+                              orderDetail.variant.rom.capacity +
+                              "GB"
+                            }}
+                          </span>
+                        </div>
+                        <div class="mb-1 text-14">
+                          <span> Số lượng: {{ orderDetail.quantity }} </span>
+                        </div>
+                      </div>
                     </div>
-                    <div class="h-100 pl-3">
-                      <div class="mb-1">
-                        <span>
-                          {{ orderDetail.variant.mobilePhone.name }}
-                        </span>
-                      </div>
-                      <div class="mb-1 text-grey-lighten-1 text-14">
-                        <span>
-                          Phân loại hàng:
-                          {{
-                            orderDetail.variant.color.name +
-                            "/" +
-                            orderDetail.variant.rom.capacity +
-                            "GB"
-                          }}
-                        </span>
-                      </div>
-                      <div class="mb-1 text-14">
-                        <span> Số lượng: {{ orderDetail.quantity }} </span>
-                      </div>
-                    </div>
-                  </div>
+                  </router-link>
                   <div class="h-100 d-flex align-center text-14">
                     <span class="text-red-accent-3 font-weight-medium">{{
                       new Intl.NumberFormat("en-DE").format(orderDetail.price) +
@@ -224,7 +229,7 @@ function totalPrice(orderDetails) {
 </template>
 
 <style lang="scss" scoped>
-.active {
+.active.status-item {
   color: #388e3c;
   border-bottom: 1px #388e3c solid;
 }

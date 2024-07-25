@@ -37,6 +37,8 @@ function decodedToken(token) {
   }
 }
 
+const cart = computed(() => store.cart);
+
 const isLoggedIn = computed(() => store.isLoggedIn);
 
 //isLoggedIn thay đổi thì cập nhật hiển thị thông tin người dùng
@@ -99,6 +101,10 @@ function filterByRom(variants) {
   });
   return variantsFiltered;
 }
+
+function toCart(){
+  router.push("/cart");
+}
 </script>
 
 <template>
@@ -159,7 +165,7 @@ function filterByRom(variants) {
                   :key="variant.id"
                 >
                   <router-link
-                    to=""
+                    :to="'/mobile-phone/' + variant.id"
                     class="d-block text-decoration-none pb-2 text-grey-darken-4"
                   >
                     <li class="item d-flex align-item mb-2">
@@ -205,14 +211,14 @@ function filterByRom(variants) {
         <div
           class="d-flex align-center hover-opacity-80 px-1 mx-3 h-100 cursor-pointer text-grey-darken-4"
         >
-          <div class="position-relative">
+          <div class="position-relative" @click="toCart()">
             <font-awesome-icon
               class="text-xl"
               :icon="['fas', 'cart-shopping']"
             />
             <span
               class="position-absolute text-white border-solid border-sm rounded-circle w-3 h-3 bg-red-darken-1 text-10 d-flex justify-center align-center top-0 start-50 translate-middle-x"
-              >0</span
+              >{{ cart.length }}</span
             >
           </div>
         </div>

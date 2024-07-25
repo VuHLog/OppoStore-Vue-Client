@@ -25,9 +25,9 @@ body {
   border-bottom: 1px solid rgb(63, 63, 70);
 }
 
-.border-green-darken-4{
+.border-green-darken-4 {
   border-width: 1px !important;
-  border-color: #1B5E20 !important;
+  border-color: #1b5e20 !important;
 }
 
 .rounded-be-xl {
@@ -36,6 +36,14 @@ body {
 
 .rounded-te-xl {
   border-top-right-radius: 24px;
+}
+
+.rounded-te {
+  border-top-right-radius: 4px;
+}
+
+.rounded-ts {
+  border-top-left-radius: 4px;
 }
 
 .text-10 {
@@ -80,12 +88,19 @@ body {
   width: 28px;
 }
 
-.w-3{
+.w-3 {
   width: 0.75rem;
 }
 
-.w-20px{
+.w-20px {
   width: 20px;
+}
+.w-30px {
+  width: 30px;
+}
+
+.w-100px {
+  width: 100px;
 }
 
 .w-33p {
@@ -104,11 +119,15 @@ body {
   width: 66.66667%;
 }
 
-.min-w-100{
+.min-w-100 {
   min-width: 100%;
 }
 
-.h-3{
+.max-w-600px {
+  max-width: 600px;
+}
+
+.h-3 {
   height: 0.75rem;
 }
 
@@ -124,7 +143,7 @@ body {
   height: 60px;
 }
 
-.h-12{
+.h-12 {
   height: 3rem;
 }
 
@@ -132,8 +151,20 @@ body {
   height: 6rem;
 }
 
-.h-12_5{
+.h-12_5 {
   height: 12.5rem;
+}
+
+.min-h-40px {
+  min-height: 40px;
+}
+
+.h-30px {
+  height: 30px;
+}
+
+.h-100px {
+  height: 100px;
 }
 
 .h-80 {
@@ -185,16 +216,24 @@ body {
   transform: scale(1.05);
 }
 
-.hover-text-green-lighten-2:hover{
-  color: #388E3C !important;
+.hover-text-green-lighten-2:hover {
+  color: #388e3c !important;
 }
 
-.hover-text-green-darken-1:hover{
-  color: #43A047;
+.hover-text-green-darken-1:hover {
+  color: #43a047 !important;
 }
 
-.hover-bg-green-lighten-2:hover{
-  background-color: #388E3C;
+.hover-text-grey-darken-4:hover {
+  color: #212121 !important;
+}
+
+.hover-bg-green-lighten-2:hover {
+  background-color: #388e3c;
+}
+
+.hover-text-underline:hover {
+  text-decoration: underline;
 }
 
 .z-30 {
@@ -229,14 +268,13 @@ body {
   width: 100%;
 }
 
-.mt-30{
+.mt-30 {
   margin-top: 120px;
 }
 
-.input-box-shadow-none:focus{
+.input-box-shadow-none:focus {
   box-shadow: none !important;
 }
-.box-shadow-none{
+.box-shadow-none {
   box-shadow: none !important;
 }
-

@@ -1,12 +1,16 @@
 <script setup>
 import { ref, onMounted, getCurrentInstance } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
-import VCard from "@components/VCard.vue";
+import { inject } from "vue";
+import { useBaseStore } from "@/store/index.js";
 
+const swal = inject("$swal");
+const store = useBaseStore();
 const { proxy } = getCurrentInstance();
 const route = useRoute();
+const router = useRouter();
 const variantId = ref(route.params.variantId);
 
 const variantAccessed = ref({}); // biến thể được truy cập
@@ -74,6 +78,57 @@ const currentSlide = ref(0);
 
 function slideTo(val) {
   currentSlide.value = val;
+}
+
+//them gio hang
+function addToCart() {
+  if (variantAccessed.value.stock > 0) {
+    store.addToCart({
+      id: variantAccessed.value.id,
+      name: `${mobilePhone.value.name} ${mobilePhone.value.ram}GB/${variantAccessed.value.rom?.capacity}GB`,
+      price: variantAccessed.value.price,
+      image: variantAccessed.value.image,
+    });
+    const Toast = swal.mixin({
+      toast: true,
+      position: "top",
+      showConfirmButton: false,
+      timer: 1000,
+      didOpen: (toast) => {
+        toast.onmouseenter = swal.stopTimer;
+        toast.onmouseleave = swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Thêm vào giỏ hàng thành công!",
+    });
+  } else {
+    const Toast = swal.mixin({
+      toast: true,
+      position: "top",
+      showConfirmButton: false,
+      timer: 1000,
+      didOpen: (toast) => {
+        toast.onmouseenter = swal.stopTimer;
+        toast.onmouseleave = swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "info",
+      title: "Sản phẩm này hiện hết hàng!",
+    });
+  }
+}
+
+//xử lý click mua ngay
+function buyNow() {
+  addToCart({
+    id: variantAccessed.value.id,
+    name: `${mobilePhone.value.name} ${mobilePhone.value.ram}GB/${variantAccessed.value.rom?.capacity}GB`,
+    price: variantAccessed.value.price,
+  });
+  router.push("/cart");
 }
 </script>
 
@@ -150,7 +205,10 @@ function slideTo(val) {
         </div>
         <div class="col-6">
           <div class="pl-5">
-            <p class="m-0 mb-3 text-red-accent-3 font-weight-black" v-if="variantAccessed.stock > 0">
+            <p
+              class="m-0 mb-3 text-red-accent-3 font-weight-black"
+              v-if="variantAccessed.stock > 0"
+            >
               {{
                 new Intl.NumberFormat("en-DE").format(variantAccessed.price) +
                 "₫"
@@ -231,6 +289,7 @@ function slideTo(val) {
                 type="button"
                 class="rounded py-2 px-4 bg-green-darken-4 mr-2"
                 style="width: calc(100% - 70px)"
+                @click="buyNow()"
               >
                 <strong>MUA NGAY</strong>
               </v-btn>
@@ -238,6 +297,7 @@ function slideTo(val) {
                 type="button"
                 class="rounded py-2 px-4 border-solid border-green-darken-4 box-shadow-none mr-2"
                 style="width: calc(60px)"
+                @click="addToCart()"
               >
                 <font-awesome-icon
                   class="text-green-darken-4"

@@ -11,7 +11,7 @@ window.addEventListener("scroll", function () {
 </script>
 
 <template>
-  <header id="header" class="bg-white position-sticky top-0 z-30">
+  <header id="header" class="bg-white position-sticky top-0 z-30 border-b-sm border-solid">
     <Navbar class="px-16"> </Navbar>
   </header>
 </template>

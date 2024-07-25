@@ -16,6 +16,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
+    "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
