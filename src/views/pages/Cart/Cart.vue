@@ -2,8 +2,10 @@
 import { computed, ref, onMounted, getCurrentInstance } from "vue";
 import { useBaseStore } from "@/store/index.js";
 import { inject } from "vue";
+import { useRouter } from "vue-router";
 
 const proxy = getCurrentInstance();
+const router = useRouter();
 const store = useBaseStore();
 const swal = inject("$swal");
 const Toast = swal.mixin({
@@ -18,9 +20,6 @@ const Toast = swal.mixin({
 });
 
 store.showFooter = false;
-
-const check = ref(true);
-
 const cart = computed(() => store.cart);
 const totalPrice = computed(() => store.totalPrice);
 const totalQuantity = computed(() => store.totalQuantity);
@@ -47,11 +46,19 @@ function changeQuantity(variantId, quantityCurr, number) {
 function removeFromCart(variantId) {
   store.removeFromCart(variantId);
 }
+
+//click btn Mua Ngay
+function buyNow() {
+  router.push("/cart/payment-info");
+}
 </script>
 
 <template>
   <div class="d-flex justify-center">
-    <div class="max-w-600px w-100 position-relative">
+    <div
+      class="max-w-600px w-100 position-relative"
+      style="margin-bottom: 100px"
+    >
       <div
         class="min-h-40px w-100 align-center position-relative border-b-sm border-solid mb-4"
       >
@@ -114,9 +121,7 @@ function removeFromCart(variantId) {
                   />
                   <span
                     class="d-flex justify-center align-center bg-grey-lighten-2 cursor-pointer rounded-sm h-30px w-30px user-none"
-                    @click="
-                      changeQuantity(item.variant.id, item.quantity, 1)
-                    "
+                    @click="changeQuantity(item.variant.id, item.quantity, 1)"
                     >+</span
                   >
                 </div>
@@ -125,27 +130,26 @@ function removeFromCart(variantId) {
           </div>
         </template>
       </div>
-
-      <div
-        class="w-100 p-3 rounded-lg border-solid border-sm d-flex justify-space-between align-center position-fixed bottom-0 start-50 translate-middle z-30 bg-white max-w-600px"
-      >
-        <div>
-          <p class="m-0 text-grey-darken-4">
-            Tạm tính:
-            <span class="text-red-accent-3 font-weight-bold">
-              {{ new Intl.NumberFormat("en-DE").format(totalPrice) + "₫" }}
-            </span>
-          </p>
-        </div>
-        <div>
-          <v-btn
-            type="button"
-            class="rounded py-2 px-4 bg-green-darken-4 mr-2"
-            @click="buyNow()"
-          >
-            <strong>Mua ngay {{ `(${totalQuantity})` }}</strong>
-          </v-btn>
-        </div>
+    </div>
+    <div
+      class="w-100 p-3 rounded-lg border-solid border-sm d-flex justify-space-between align-center position-fixed bottom-0 start-50 translate-middle z-30 bg-white max-w-600px"
+    >
+      <div>
+        <p class="m-0 text-grey-darken-4">
+          Tạm tính:
+          <span class="text-red-accent-3 font-weight-bold">
+            {{ new Intl.NumberFormat("en-DE").format(totalPrice) + "₫" }}
+          </span>
+        </p>
+      </div>
+      <div>
+        <v-btn
+          type="button"
+          class="rounded py-2 px-4 bg-green-darken-4 mr-2"
+          @click="buyNow()"
+        >
+          <strong>Mua ngay {{ `(${totalQuantity})` }}</strong>
+        </v-btn>
       </div>
     </div>
   </div>
