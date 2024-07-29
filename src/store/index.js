@@ -12,6 +12,7 @@ export const useBaseStore = defineStore("base", {
       roles: "",
       username: "",
       fullName: "",
+      tokenGHN: '399094ea-4b6f-11ef-b635-eeb7b370243f',
       avatarUserDefault:
         "https://res.cloudinary.com/iflixlong/image/upload/v1717530924/icon-256x256_judaje.png",
     };

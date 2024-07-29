@@ -10,7 +10,9 @@ import Password from "@pages/User/Password.vue"
 import Purchase from "@pages/User/Purchase.vue"
 import Filter from "@pages/Filter.vue"
 import MobilePhone from "@pages/MobilePhone.vue"
-import Cart from "@pages/Cart.vue"
+import Cart from "@pages/Cart/Cart.vue"
+import PaymentInfo from "@pages/Cart/PaymentInfo.vue"
+import Payment from "@pages/Cart/Payment.vue"
 
 
 
@@ -76,12 +78,26 @@ const routes = [
         name: "Cart",
         component: Cart,
       },
+
+      {
+        path: "/cart/payment-info",
+        name: "Payment Info",
+        component: PaymentInfo,
+        meta: { requiresAuth: true },
+      },
+
+      {
+        path: "/cart/payment",
+        name: "Payment",
+        component: Payment,
+        meta: { requiresAuth: true },
+      },
     ]
   },
-  // {
-  //   path: "/:pathMatch(.*)*",
-  //   redirect: "/home",
-  // },
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/home",
+  },
 ];
 
 const router = createRouter({
@@ -110,7 +126,6 @@ router.beforeEach((to, from, next) => {
 function isLoggedIn() {
   const store = useBaseStore();
   const token = localStorage.getItem("token");
-  store.isLoggedIn = true;
 
   if (token) {
     //giải mã token

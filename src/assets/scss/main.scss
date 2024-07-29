@@ -103,12 +103,20 @@ body {
   width: 100px;
 }
 
+.w-30p {
+  width: 30%;
+}
+
 .w-33p {
   width: 33.33333%;
 }
 
 .w-40p {
   width: 40%;
+}
+
+.w-48p {
+  width: 48%;
 }
 
 .w-60p {
@@ -159,8 +167,16 @@ body {
   min-height: 40px;
 }
 
+.h-20px {
+  height: 20px;
+}
+
 .h-30px {
   height: 30px;
+}
+
+.h-50px {
+  height: 50px;
 }
 
 .h-100px {

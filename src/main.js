@@ -29,6 +29,9 @@ import { base } from "./apis/ApiService.js";
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
+//google login
+import vue3GoogleLogin from 'vue3-google-login'
+
 const pinia = createPinia();
 const app = createApp(App);
 
@@ -57,6 +60,9 @@ app.use(vuetify);
 app.use(pinia);
 app.use(bootstrap);
 app.use(VueSweetalert2);
+app.use(vue3GoogleLogin, {
+  clientId: '692742684673-ntqlvn9b4b153p0b4i2oc5fqf4ff2ndl.apps.googleusercontent.com'
+})
 
 const config = app.config;
 config.globalProperties.$api = base;
