@@ -11,6 +11,16 @@ const totalPages = ref(10);
 const field = ref("price");
 const pageSize = ref(8);
 const pageNumber = ref(1);
+const searchText = ref(route.query.searchText);
+
+watch(() => route.query.searchText, (newVal)=>{
+  searchText.value = newVal;
+  loadData();
+})
+
+watch(pageNumber, () => {
+  loadData();
+});
 
 const sortPrice = ref([
   { display: "Giá cao đến thấp", value: "DESC" },
@@ -83,6 +93,7 @@ onMounted(async () => {
 });
 
 function filterByRom(variants) {
+  variantsFilteredByROM.value = [];
   // Lấy danh sách loại khác nhau
   const romSet = new Set();
   variants.forEach((variant) => {
@@ -118,7 +129,9 @@ async function loadData() {
         "&rom=" +
         romSelected.value +
         "&charge=" +
-        chargeSelected.value
+        chargeSelected.value +
+        "&searchText=" +
+        searchText.value
     )
     .then((res) => {
       variantsFiltered.value = res.content;
@@ -141,16 +154,14 @@ function resetFilterValue() {
   ramSelected.value = "";
   romSelected.value = "";
   chargeSelected.value = "";
+  route.query.searchText = "";
+  searchText.value= "";
 }
 
 async function btnCancelClicked() {
   resetFilterValue();
   await loadData();
 }
-
-watch(pageNumber, () => {
-  loadData();
-});
 </script>
 
 <template>

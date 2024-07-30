@@ -8,14 +8,14 @@ const { proxy } = getCurrentInstance();
 const store = useBaseStore();
 const router = useRouter();
 
-const username = computed(()=> store.username);
+const username = computed(() => store.username);
 const avatarUrl = ref("");
 const name = ref("");
 
 const searchText = ref("");
 
 const pageSize = ref(3);
-const mobilePhonesSearched = ref([]);
+const VariantMobilePhonesSearched = ref([]);
 
 const showUserMenu = ref(false);
 
@@ -30,7 +30,7 @@ function decodedToken(token) {
     store.username = decoded.sub;
     avatarUrl.value = decoded.avatarUrl;
     name.value = decoded.name;
-    store.isLoggedIn=true;
+    store.isLoggedIn = true;
   } else {
     store.username = "";
     avatarUrl.value = "";
@@ -55,13 +55,13 @@ watch(isLoggedIn, (newVal) => {
 const loadData = () => {
   proxy.$api
     .get(
-      "/api/mobilePhones?pageSize=" +
+      "/api/variants?pageSize=" +
         pageSize.value +
-        "&search=" +
+        "&searchText=" +
         searchText.value
     )
     .then((res) => {
-      mobilePhonesSearched.value = res.content;
+      VariantMobilePhonesSearched.value = res.content;
     });
 };
 
@@ -78,7 +78,7 @@ async function logOut() {
     await proxy.$api
       .post("/auth/logout", token)
       .then(() => {
-        store.isLoggedIn=false;
+        store.isLoggedIn = false;
         localStorage.removeItem("token");
         decodedToken(null);
         router.push("/sign-in");
@@ -104,7 +104,7 @@ function filterByRom(variants) {
   return variantsFiltered;
 }
 
-function toCart(){
+function toCart() {
   router.push("/cart");
 }
 </script>
@@ -156,52 +156,46 @@ function toCart(){
           >
             <ul
               class="list-item p-0 p-1 m-0 border-b-custom"
-              v-if="mobilePhonesSearched.length !== 0"
+              v-if="VariantMobilePhonesSearched.length !== 0"
             >
               <template
-                v-for="mobilePhone in mobilePhonesSearched"
-                :key="mobilePhone.id"
+                v-for="variant in filterByRom(VariantMobilePhonesSearched)"
+                :key="variant.id"
               >
-                <template
-                  v-for="variant in filterByRom(mobilePhone.variants)"
-                  :key="variant.id"
+                <router-link
+                  :to="'/mobile-phone/' + variant.id"
+                  class="d-block text-decoration-none pb-2 text-grey-darken-4"
                 >
-                  <router-link
-                    :to="'/mobile-phone/' + variant.id"
-                    class="d-block text-decoration-none pb-2 text-grey-darken-4"
-                  >
-                    <li class="item d-flex align-item mb-2">
-                      <div class="mr-1">
-                        <img class="h-15" :src="variant.image" alt="" />
-                      </div>
-                      <div
-                        class="movie-info d-flex flex-column justify-start align-start"
+                  <li class="item d-flex align-item mb-2">
+                    <div class="mr-1">
+                      <img class="h-15" :src="variant.image" alt="" />
+                    </div>
+                    <div
+                      class="movie-info d-flex flex-column justify-start align-start"
+                    >
+                      <p class="m-0 text-start text-14">
+                        {{ variant.mobilePhone.name }}
+                      </p>
+                      <p class="m-0 text-start text-12 text-grey-lighten-1">
+                        {{
+                          `Màu: ${variant.color.name}, ROM: ${variant.rom.capacity}GB`
+                        }}
+                      </p>
+                      <p
+                        class="m-0 text-start text-red-accent-3 font-weight-bold"
                       >
-                        <p class="m-0 text-start text-14">
-                          {{ mobilePhone.name }}
-                        </p>
-                        <p class="m-0 text-start text-12 text-grey-lighten-1">
-                          {{
-                            `Màu: ${variant.color.name}, ROM: ${variant.rom.capacity}GB`
-                          }}
-                        </p>
-                        <p
-                          class="m-0 text-start text-red-accent-3 font-weight-bold"
-                        >
-                          {{
-                            new Intl.NumberFormat("en-DE").format(
-                              variant.price
-                            ) + "₫"
-                          }}
-                        </p>
-                      </div>
-                    </li>
-                  </router-link>
-                </template>
+                        {{
+                          new Intl.NumberFormat("en-DE").format(variant.price) +
+                          "₫"
+                        }}
+                      </p>
+                    </div>
+                  </li>
+                </router-link>
               </template>
             </ul>
             <router-link
-              :to="'/search?searchText=' + searchText"
+              :to="'/mobile-phone?searchText=' + searchText"
               class="text-decoration-none"
             >
               <p class="m-0 text-green-darken-4 text-center p-1">
