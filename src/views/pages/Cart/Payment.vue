@@ -46,25 +46,24 @@ async function payBtn() {
   });
 
   //thêm mới order
-  await proxy.$api
-    .post("/api/orders", order.value)
-    .then((res) => {
-      const Toast = swal.mixin({
-        toast: true,
-        position: "top",
-        showConfirmButton: false,
-        timer: 1000,
-        didOpen: (toast) => {
-          toast.onmouseenter = swal.stopTimer;
-          toast.onmouseleave = swal.resumeTimer;
-        },
-      });
-      Toast.fire({
-        icon: "success",
-        title: "Đặt hàng thành công!",
-      });
-      router.push("/user/purchase")
+  await proxy.$api.post("/api/orders", order.value).then((res) => {
+    const Toast = swal.mixin({
+      toast: true,
+      position: "top",
+      showConfirmButton: false,
+      timer: 1000,
+      didOpen: (toast) => {
+        toast.onmouseenter = swal.stopTimer;
+        toast.onmouseleave = swal.resumeTimer;
+      },
     });
+    Toast.fire({
+      icon: "success",
+      title: "Đặt hàng thành công!",
+    });
+    store.clearCart();
+    router.push("/user/purchase");
+  });
 }
 </script>
 

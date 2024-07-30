@@ -57,7 +57,7 @@ export const useBaseStore = defineStore("base", {
 
     clearCart() {
       this.cart = [];
-      Cookies.set("cart", JSON.stringify(cart.value), { expires: 7 });
+      Cookies.set("cart", JSON.stringify(this.cart), { expires: 7 });
     },
   },
 });
