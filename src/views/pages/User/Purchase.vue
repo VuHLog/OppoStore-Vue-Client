@@ -1,10 +1,12 @@
 <script setup>
 import { watch, ref, getCurrentInstance, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import {useBaseStore} from "@/store/index.js"
 
 const { proxy } = getCurrentInstance();
 
 const route = useRoute();
+const store = useBaseStore();
 
 const totalElements = ref(0);
 const totalPages = ref(10);
@@ -16,9 +18,21 @@ const statusAccess = ref("");
 const orders = ref([]);
 
 const active = ref("");
+const customerByUsername = ref({});
 
 onMounted(async () => {
   loadData("");
+  await proxy.$api
+    .get("/api/customers/by-username/" + store.username)
+    .then((res) => {
+      customerByUsername.value = res.result;
+      if (customerByUsername.value === undefined) {
+        customerByUsername.value = {};
+      }
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 });
 
 async function loadData(status) {
@@ -28,6 +42,8 @@ async function loadData(status) {
     .get(
       "/api/orders?status=" +
         status +
+        "&customerId=" +
+        customerByUsername.value.id +
         "&field=" +
         field.value +
         "&pageNumber=" +
