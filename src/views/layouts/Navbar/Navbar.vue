@@ -8,7 +8,7 @@ const { proxy } = getCurrentInstance();
 const store = useBaseStore();
 const router = useRouter();
 
-const username = ref("");
+const username = computed(()=> store.username);
 const avatarUrl = ref("");
 const name = ref("");
 
@@ -27,12 +27,12 @@ onMounted(() => {
 function decodedToken(token) {
   if (token) {
     const decoded = jwtDecode(token);
-    username.value = decoded.sub;
+    store.username = decoded.sub;
     avatarUrl.value = decoded.avatarUrl;
     name.value = decoded.name;
     store.isLoggedIn=true;
   } else {
-    username.value = "";
+    store.username = "";
     avatarUrl.value = "";
     name.value = "";
   }

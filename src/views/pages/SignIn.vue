@@ -21,7 +21,7 @@ const user = ref({
 
 onMounted(() => {
   if (store.username !== "") {
-    return router.push("/home");
+    return router.push(redirect);
   }
 });
 
