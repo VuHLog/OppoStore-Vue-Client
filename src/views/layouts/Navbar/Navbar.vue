@@ -30,6 +30,7 @@ function decodedToken(token) {
     username.value = decoded.sub;
     avatarUrl.value = decoded.avatarUrl;
     name.value = decoded.name;
+    store.isLoggedIn=true;
   } else {
     username.value = "";
     avatarUrl.value = "";
@@ -77,6 +78,7 @@ async function logOut() {
     await proxy.$api
       .post("/auth/logout", token)
       .then(() => {
+        store.isLoggedIn=false;
         localStorage.removeItem("token");
         decodedToken(null);
         router.push("/sign-in");
@@ -222,12 +224,12 @@ function toCart(){
             >
           </div>
         </div>
-        <router-link to="/sign-in" v-if="username === ''">
+        <router-link to="/sign-in" v-if="!isLoggedIn">
           <v-btn class="rounded-lg bg-green-darken-4 text-white"
             >Đăng nhập
           </v-btn>
         </router-link>
-        <div class="account position-relative" v-if="username !== ''">
+        <div class="account position-relative" v-if="isLoggedIn">
           <div
             class="avatar d-flex align-center cursor-pointer"
             @click="showUserMenu = !showUserMenu"

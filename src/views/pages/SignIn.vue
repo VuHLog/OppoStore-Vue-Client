@@ -1,13 +1,16 @@
 <script setup>
 import { ref, getCurrentInstance, onMounted } from "vue";
 import { useBaseStore } from "@/store/index.js";
-import { useRouter } from "vue-router";
+import { useRouter,useRoute } from "vue-router";
 
 const { proxy } = getCurrentInstance();
 
 const store = useBaseStore();
 
 const router = useRouter();
+
+const route = useRoute();
+const redirect = route.query.redirect?route.query.redirect:'/home';
 
 const errorMsg = ref("");
 
@@ -33,7 +36,7 @@ async function signIn() {
     .then((res) => {
       localStorage.setItem("token", res.result.token);
       store.isLoggedIn = true;
-      router.push("/home");
+      router.push(redirect);
     })
     .catch(() => {
       errorMsg.value = "Tài khoản, mật khẩu không chính xác!";
@@ -48,7 +51,7 @@ const callback = async (response) => {
   console.log("token ", res.result.token);
   localStorage.setItem("token", res.result.token);
   store.isLoggedIn = true;
-  router.push("/home");
+  router.push(redirect);
 };
 </script>
 
