@@ -146,7 +146,7 @@ async function payBtn() {
             <input
               type="radio"
               id="VNPAY"
-              value="VNPAY"
+              value="Thanh toán qua VNPAY"
               v-model="paymentQuote"
               class="mr-2"
             />
