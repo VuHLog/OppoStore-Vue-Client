@@ -70,7 +70,7 @@ function buyNow() {
         </router-link>
         <h5 class="text-center m-0 font-weight-bold">Giỏ hàng của bạn</h5>
       </div>
-      <div class="w-100">
+      <div class="w-100" v-if="cart.length > 0">
         <template v-for="item in cart" :key="item.variant.id">
           <div
             class="p-3 rounded-lg border-sm border-solid d-flex justify-space-between mb-4"
@@ -130,26 +130,39 @@ function buyNow() {
           </div>
         </template>
       </div>
+      <div v-else class="text-center text-grey-darken-1">
+        <h4>Không có sản phẩm nào trong giỏ hàng</h4>
+      </div>
     </div>
     <div
       class="w-100 p-3 rounded-lg border-solid border-sm d-flex justify-space-between align-center position-fixed bottom-0 start-50 translate-middle z-30 bg-white max-w-600px"
     >
-      <div>
-        <p class="m-0 text-grey-darken-4">
-          Tạm tính:
-          <span class="text-red-accent-3 font-weight-bold">
-            {{ new Intl.NumberFormat("en-DE").format(totalPrice) + "₫" }}
-          </span>
-        </p>
-      </div>
-      <div>
-        <v-btn
-          type="button"
-          class="rounded py-2 px-4 bg-green-darken-4 mr-2"
-          @click="buyNow()"
+      <template v-if="cart.length > 0">
+        <div>
+          <p class="m-0 text-grey-darken-4">
+            Tạm tính:
+            <span class="text-red-accent-3 font-weight-bold">
+              {{ new Intl.NumberFormat("en-DE").format(totalPrice) + "₫" }}
+            </span>
+          </p>
+        </div>
+        <div>
+          <v-btn
+            type="button"
+            class="rounded py-2 px-4 bg-green-darken-4 mr-2"
+            @click="buyNow()"
+          >
+            <strong>Mua ngay {{ `(${totalQuantity})` }}</strong>
+          </v-btn>
+        </div>
+      </template>
+      <div v-else class="w-100">
+        <router-link
+          class="rounded d-inline-block text-center py-2 px-4 bg-green-darken-4 mr-2 text-decoration-none w-100"
+          to="/home"
         >
-          <strong>Mua ngay {{ `(${totalQuantity})` }}</strong>
-        </v-btn>
+          <strong> Quay lại trang chủ</strong>
+        </router-link>
       </div>
     </div>
   </div>
