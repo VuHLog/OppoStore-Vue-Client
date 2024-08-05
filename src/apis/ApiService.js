@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useBaseStore } from "@/store/index.js";
 
 // Tạo một instance của axios với các default config
 const instance = axios.create({
@@ -26,12 +27,29 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const { response } = error
-    if (response && response.status === 401) {
-      // Nếu token hết hạn hoặc không hợp lệ, thực hiện đăng xuất
-      // await store.dispatch('logout')
-      // // Chuyển hướng về trang đăng nhập
-      // router.push('/sign-in')
+    console.log(error.response);
+    const originalConfig = error.config;
+    if (originalConfig.url !== "/auth/token" && error.response) {
+      // Access Token was expired
+      if (error.response.status === 401 && !originalConfig._retry) {
+        originalConfig._retry = true;
+
+        try {
+          const token = localStorage.getItem("token");
+          localStorage.removeItem("token");
+          const rs = await base.post("/auth/refresh", token);
+
+          const accessToken = rs.result.token;
+
+          const store = useBaseStore();
+
+          store.refreshToken(accessToken);
+
+          return instance(originalConfig);
+        } catch (_error) {
+          return Promise.reject(_error);
+        }
+      }
     }
     return Promise.reject(error)
   }

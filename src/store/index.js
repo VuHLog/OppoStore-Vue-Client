@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
 export const useBaseStore = defineStore("base", {
   state: () => {
@@ -12,7 +13,7 @@ export const useBaseStore = defineStore("base", {
       roles: "",
       username: "",
       fullName: "",
-      tokenGHN: '399094ea-4b6f-11ef-b635-eeb7b370243f',
+      tokenGHN: "399094ea-4b6f-11ef-b635-eeb7b370243f",
       avatarUserDefault:
         "https://res.cloudinary.com/iflixlong/image/upload/v1717530924/icon-256x256_judaje.png",
     };
@@ -20,7 +21,7 @@ export const useBaseStore = defineStore("base", {
   getters: {
     totalPrice: (state) => {
       let total = state.cart.reduce((prev, next) => {
-        return prev + (next.variant.price * next.quantity);
+        return prev + next.variant.price * next.quantity;
       }, 0);
       return total;
     },
@@ -32,6 +33,10 @@ export const useBaseStore = defineStore("base", {
     },
   },
   actions: {
+    refreshToken(accessToken) {
+      this.isLoggedIn = true;
+      localStorage.setItem("token",accessToken);
+    },
     addToCart(variant) {
       let index = this.cart.findIndex((item) => item.variant.id === variant.id);
       if (index >= 0) {
