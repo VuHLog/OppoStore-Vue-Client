@@ -228,7 +228,7 @@ function toCart() {
             class="avatar d-flex align-center cursor-pointer"
             @click="showUserMenu = !showUserMenu"
           >
-            <img class="rounded-circle" :src="avatarUrl" alt="avatar" />
+            <img class="rounded-circle h-12" :src="avatarUrl" alt="avatar" />
             <font-awesome-icon
               style="color: #bdc3c7; font-size: 0.8rem"
               :icon="['fas', 'angle-down']"

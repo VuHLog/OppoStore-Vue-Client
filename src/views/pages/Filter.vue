@@ -11,7 +11,7 @@ const totalPages = ref(10);
 const field = ref("price");
 const pageSize = ref(8);
 const pageNumber = ref(1);
-const searchText = ref(route.query.searchText);
+const searchText = ref("");
 
 watch(() => route.query.searchText, (newVal)=>{
   searchText.value = newVal;
@@ -89,7 +89,8 @@ const variantsFiltered = ref([]);
 const variantsFilteredByROM = ref([]);
 
 onMounted(async () => {
-  loadData();
+  searchText.value = route.query.searchText===undefined?"":route.query.searchText;
+  await loadData();
 });
 
 function filterByRom(variants) {

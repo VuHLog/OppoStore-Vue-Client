@@ -1,9 +1,37 @@
 <script setup>
+import { getCurrentInstance, ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import { useBaseStore } from "@/store/index.js";
+import { jwtDecode } from "jwt-decode";
 
+const {proxy} = getCurrentInstance();
+const store = useBaseStore();
 const route = useRoute();
 function getRouteName() {
   return route.name;
+}
+
+const username = computed(() => store.username);
+const avatarUrl = ref("");
+const name = ref("");
+
+onMounted(() => {
+  let token = localStorage.getItem("token");
+  decodedToken(token);
+});
+
+function decodedToken(token) {
+  if (token) {
+    const decoded = jwtDecode(token);
+    store.username = decoded.sub;
+    avatarUrl.value = decoded.avatarUrl;
+    name.value = decoded.name;
+    store.isLoggedIn = true;
+  } else {
+    store.username = "";
+    avatarUrl.value = "";
+    name.value = "";
+  }
 }
 </script>
 
@@ -16,11 +44,12 @@ function getRouteName() {
       >
         <div class="d-flex align-center cursor-pointer">
           <img
-            class="rounded-circle h-12"
-            src="https://res.cloudinary.com/cloud1412/image/upload/v1720963270/hwot10dc7skwjnmvjcru.jpg"
+            class="rounded-circle"
+            :src="avatarUrl"
             alt="avatar"
+            style="height: 60px; width: 60px;"
           />
-          <span class="pl-4 font-weight-bold">long</span>
+          <span class="pl-4 font-weight-bold">{{name}}</span>
         </div>
       </router-link>
       <div class="mt-7">
